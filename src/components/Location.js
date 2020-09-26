@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import {Row,Container,Image,Col,InputGroup,Button,Form} from 'react-bootstrap'
 // import { Formik, Field, Form } from "formik";
 
-
-
+import Node from './Node'
+let count=[]
 export class Location extends Component {
 
     constructor(){
@@ -13,7 +13,9 @@ export class Location extends Component {
             key:"",
             answer:[]
         }
+       
     }
+   
     
     change(e){
         this.setState({
@@ -25,10 +27,26 @@ export class Location extends Component {
          
         // var str = document.getElementById("one").innerHTML; 
         let a = this.state.key.split(",")
+        let c=[]
+        for(let i =0;i<a.length;i++){
+            var ch = a[i];
+            var index = 0;
+
+            var j = ch.charCodeAt(index);
+            // console.log(j);
+            c[i]=j-65
+
+
+            /*
+                Output: 65
+            */
+        }
+        console.log(c);
         
-        let b=this.state.key.split(`,`).map(x=>+x)
-        console.log(b);
-        var enemy = b;
+
+        // let b=this.state.key.split(`,`).map(x=>+x)
+        // console.log(b);
+        var enemy = c;
         /* Generated from Java with JSweet 2.2.0-SNAPSHOT - http://www.jsweet.org */
 var code = (function () {
     function code() {
@@ -77,6 +95,7 @@ var code = (function () {
             ;
         }
     };
+    code.constructor=code.constructor.bind(this)
     code.constructPath = function (u, v) {
         if (code.Next_$LI$()[u][v] === -1)
             return null;
@@ -90,6 +109,11 @@ var code = (function () {
             }
         }
         ;
+        // this.state.answer.push(path)
+        count.push(path)
+        
+        
+        
         return path;
     };
     code.floydWarshall = function (V, enemy) {
@@ -242,22 +266,36 @@ code.main(null);
 
         
     }
+    
 
     render() {
+        // console.log(count);
         return (
-            <div>
+
+            <div className='p-4'>
+                <Container>
+                    <Row>
+                        <Col xs={12} md={12} className='fluid p-4'>
+                        <Image src={require('./map.jpeg')} style={{height:'auto',width:'100%'}} rounded />
+                        </Col>
+                        
+                    </Row>
+                </Container>
                 <Form>
   
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Key</Form.Label>
-                    <Form.Control name='key' required value={this.state.key} onChange={this.change.bind(this)} type="text" placeholder="Enter key" />
+                    <Form.Control name='key' required value={this.state.key} onChange={this.change.bind(this)} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)" />
                 </Form.Group>
                 
                 <Button variant="primary" type="submit" onClick={this.click.bind(this)}>
                     Submit
                 </Button>
                 </Form>
+
+                <Node nodes={[1,2,3]}/>
+                
             </div>
         )
     }
