@@ -3,30 +3,19 @@ import {Row,Container,Image,Col,InputGroup,Button,Form} from 'react-bootstrap'
 // import { Formik, Field, Form } from "formik";
 
 import Node from './Node'
-let count=[]
-export class Location extends Component {
 
-    constructor(){
-        super()
-        this.state={
-            msg:"",
-            key:"",
-            answer:[]
-        }
-       
-    }
-   
-    
-    change(e){
-        this.setState({
-            [e.target.name]:e.target.value
-        })
-    }
-    click(e){
+
+export default function Location() {
+    const [name,setname] = React.useState('');
+    const [key,setKey]= React.useState('');
+    const [arr,setArr] =React.useState([])
+    const count=[]
+    var counter=0
+    function onsubmit(e){
         e.preventDefault();
          
         // var str = document.getElementById("one").innerHTML; 
-        let a = this.state.key.split(",")
+        let a = name.split(",")
         let c=[]
         for(let i =0;i<a.length;i++){
             var ch = a[i];
@@ -95,7 +84,7 @@ var code = (function () {
             ;
         }
     };
-    code.constructor=code.constructor.bind(this)
+    
     code.constructPath = function (u, v) {
         if (code.Next_$LI$()[u][v] === -1)
             return null;
@@ -109,10 +98,43 @@ var code = (function () {
             }
         }
         ;
-        // this.state.answer.push(path)
-        count.push(path)
         
+        // setArr([
+        //     ...arr,
+        //     {
+        //         id:v,
+        //         path:path
+        //     }
+        // ])
+        count.push(path);
+        console.log(count.length);
         
+        if(counter==0){
+            let string='The suitable location to be fugitive is '+String.fromCharCode(65 + count[0][0])
+            var node = document.createElement("LI");
+                var textnode = document.createTextNode(string);
+                node.appendChild(textnode);
+                document.getElementById("myList").appendChild(node);
+        }
+        counter++;
+        if(counter==enemy.length){
+        for(let i=0;i<count.length;i++){
+            let answer=[]
+            for(let j=0;j<count[i].length;j++){
+                if(j!=0)
+                    answer.push('-->')
+                answer.push(String.fromCharCode(65 + count[i][j]))
+                
+                
+            }
+            var node = document.createElement("LI");
+                var textnode = document.createTextNode(answer.toString().replaceAll(',',''));
+                node.appendChild(textnode);
+                document.getElementById("myList").appendChild(node);
+            
+            
+        }
+    }
         
         return path;
     };
@@ -161,6 +183,8 @@ var code = (function () {
         var n = path.length;
         for (var i = 0; i < n - 1; i++) {
             console.info(String.fromCharCode((65 + path[i])) + " -> ");
+            
+            
         }
         console.info(String.fromCharCode((65 + path[n - 1])) + "\n");
     };
@@ -265,15 +289,24 @@ code.INF_$LI$();
 code.main(null);
 
         
-    }
+    
     
 
-    render() {
-        // console.log(count);
-        return (
 
-            <div className='p-4'>
-                <Container>
+    }
+    function click(e){
+        setname(e.target.value)
+        console.log(name);
+    }
+    
+    return (
+        
+        <div>
+            
+            {/* <input type="text" value={name} onChange={click}/>
+            <button type='submit' onClick={onsubmit}>Submit</button> */}
+            
+            <Container>
                     <Row>
                         <Col xs={12} md={12} className='fluid p-4'>
                         <Image src={require('./map.jpeg')} style={{height:'auto',width:'100%'}} rounded />
@@ -286,19 +319,57 @@ code.main(null);
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Key</Form.Label>
-                    <Form.Control name='key' required value={this.state.key} onChange={this.change.bind(this)} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)" />
+                    <Form.Control name='key' required value={name} onChange={click} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)" />
                 </Form.Group>
                 
-                <Button variant="primary" type="submit" onClick={this.click.bind(this)}>
+                <Button variant="primary" type="submit" onClick={onsubmit}>
                     Submit
                 </Button>
                 </Form>
-
-                <Node nodes={[1,2,3]}/>
+                <div id="ANSWER">
+                <ul id="myList">
                 
+                </ul>
             </div>
-        )
-    }
+            {/* <Node nodes={count}/> */}
+
+        </div>
+    )
 }
 
-export default Location
+// let count=[]
+// export function Location() {
+
+//     constructor(){
+//         super()
+//         this.state={
+//             msg:"",
+//             key:"",
+//             answer:[]
+//         }
+       
+//     }
+   
+    
+//     change(e){
+//         this.setState({
+//             [e.target.name]:e.target.value
+//         })
+//     }
+//     click(e){
+//         
+//     render() {
+//         // console.log(count);
+//         return (
+
+//             <div className='p-4'>
+               
+
+//                 <Node nodes={[1,2,3]}/>
+                
+//             </div>
+//         )
+//     }
+// }
+
+// export default Location
