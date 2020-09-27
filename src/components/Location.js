@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, createElement } from 'react'
 import {Row,Container,Image,Col,InputGroup,Button,Form} from 'react-bootstrap'
 // import { Formik, Field, Form } from "formik";
 import axios from 'axios'
@@ -37,17 +37,76 @@ export default function Location() {
         // let b=this.state.key.split(`,`).map(x=>+x)
         // console.log(b);
         var enemy = c;
+        document.getElementById('subarray').innerHTML=""
         var finalanswer=[]
         axios.post('/location',c)
         .then(response => {
             console.log(response.data.count)
             finalanswer=response.data.count
+            let fugitiveString=finalanswer[0]
+            let fugitive=document.createElement('DIV')
+            fugitive.innerHTML=fugitiveString
+            fugitive.style.fontSize='2rem'
+            document.getElementById('subarray').appendChild(fugitive)
             for(let i=0;i<finalanswer.length;i++){
                 var node = document.createElement("LI");
                         var textnode = document.createTextNode(finalanswer[i].toString().replaceAll(',',''));
                         
                         node.appendChild(textnode);
-                        document.getElementById("myList").appendChild(node);
+                        // document.getElementById("myList").appendChild(node);
+                        if(i!=0){
+                            let subarray=finalanswer[i].split('').join('')
+                            console.log(subarray);
+                            subarray=subarray.replaceAll('-',"")
+                            subarray=subarray.replaceAll('>',"")
+                            subarray=subarray.replaceAll(',',"")
+                            for(let j=0;j<subarray.length;j++){
+                                
+                                    let subarrayDiv=document.getElementById('subarray');
+                                    let smalldiv=document.createElement('DIV');
+                                    smalldiv.style.height='50px';
+                                    smalldiv.style.margin='4px'
+                                    smalldiv.style.color='white';
+                                    smalldiv.innerHTML=subarray[j];
+                                    smalldiv.style.backgroundColor='navy';
+                                    smalldiv.style.width='50px';
+                                    smalldiv.style.display='inline-flex'
+                                    smalldiv.style.borderRadius='50%'
+                                    smalldiv.style.textAlign='center'
+                                    smalldiv.style.justifyContent='center'
+                                    smalldiv.style.alignItems='center'
+                                    smalldiv.style.fontWeight='900'
+                                    
+                                    
+                                    if(j==subarray.length-1){
+                                        smalldiv.style.backgroundColor='red'
+                                    }
+                                    subarrayDiv.appendChild(smalldiv);
+                                    if(j!=subarray.length-1){
+                                        let arrow=document.createElement('DIV');
+                                    arrow.style.margin='4px'
+                                    arrow.style.height='50px'
+                                    arrow.innerHTML='-->'
+                                    arrow.style.display='inline'
+                                    arrow.style.textAlign='center'
+                                    arrow.style.fontWeight='900'
+                                    subarrayDiv.appendChild(arrow)
+                                    }
+                                    
+
+
+                                
+                                
+
+                            }
+                            let subarrayDiv=document.getElementById('subarray');
+                            let smalldiv=document.createElement('DIV');
+                            smalldiv.style.height='50px';
+                            subarrayDiv.appendChild(smalldiv);
+
+
+                            
+                        }
             }
             
         })
@@ -56,19 +115,19 @@ export default function Location() {
     }
     function click(e){
         setname(e.target.value)
-        console.log(name);
+       
     }
     
     return (
         
-        <div>
+        <div style={{backgroundColor:'black',height:'200vh',color:'greenyellow'}}>
             
             {/* <input type="text" value={name} onChange={click}/>
             <button type='submit' onClick={onsubmit}>Submit</button> */}
             
             <Container>
-                    <Row>
-                        <Col xs={12} md={12} className='fluid p-4'>
+                    <Row className='d-flex justify-content-center'>
+                        <Col xs={8} md={8} className='fluid p-4'>
                         <Image src={require('./map.jpeg')} style={{height:'auto',width:'100%'}} rounded />
                         </Col>
                         
@@ -77,12 +136,12 @@ export default function Location() {
                 <Form>
   
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Key</Form.Label>
-                    <Form.Control name='key' required value={name} onChange={click} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)" />
+                <Form.Group className='px-5 d-flex justify-content-center align-items-center flex-column' controlId="formBasicPassword">
+                    <Form.Label style={{fontSize:'2rem'}}>Specify Your Enemies</Form.Label>
+                    <Form.Control name='key' style={{width:'450px'}} required value={name} onChange={click} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)" />
                 </Form.Group>
                 
-                <Button variant="primary" type="submit" onClick={onsubmit}>
+                <Button variant="primary" style={{marginLeft:"46%",}} type="submit" onClick={onsubmit}>
                     Submit
                 </Button>
                 </Form>
@@ -90,6 +149,9 @@ export default function Location() {
                 <ul id="myList">
                 
                 </ul>
+                <div id="subarray" className='text-center '>
+
+                </div>
             </div>
             {/* <Node nodes={count}/> */}
 

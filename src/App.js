@@ -12,7 +12,7 @@ import Login from './components/Login';
 function App() {
   const name1='sanath'
   const [name,setname] = React.useState('');
-  const [pass,setPass]=React.useState(false)
+  const [pass,setPass]=React.useState(true)
     function click(e){
         setname(e.target.value)
         console.log(name);

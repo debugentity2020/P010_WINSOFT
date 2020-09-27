@@ -21,9 +21,9 @@ export default class Decrypter extends Component {
             console.log(response.data)
             answerString=response.data.data
             answerString = answerString.replaceAll( ',' , "" )
-    answerString = answerString.replaceAll( '_' , "" )
-    console.log(answerString);
-    document.getElementById('Answer').innerHTML=answerString;
+            answerString = answerString.replaceAll( '_' , "" )
+            console.log(answerString);
+            document.getElementById('Answer').innerHTML=answerString;
             
             
         })
