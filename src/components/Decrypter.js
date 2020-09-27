@@ -1,5 +1,6 @@
 import React ,{ Component }  from 'react'
 import {Form,Button} from 'react-bootstrap'
+import './Decrypter.css';
 export default class Decrypter extends Component {
 
     constructor(){
@@ -127,30 +128,41 @@ Decryption.main(null);
 
     }
     render(){
+        
     return (
-        <div className='p-4 m-2' style={{border:'2px solid green'}}>
+        <div>
+        <div className="display-4 text-warning text-center " style={{backgroundColor:'black'}}>Decryptor</div>
+        <div className='outer-background text-center'>
+            
+        <div className='p-4 background' style={{border:'2px solid green'}}>
             <Form>
   <Form.Group controlId="formBasicEmail">
-    <Form.Label>Encrypted Message</Form.Label>
+    <Form.Label style={{fontSize:'1.6rem'}}>Encrypted Message</Form.Label>
     <Form.Control name='msg' required value={this.state.msg} onChange={this.change.bind(this)} type="text" placeholder="Enter encrypted message" />
     <Form.Text className="text-muted">
       
     </Form.Text>
   </Form.Group>
-
+  <br></br>
+        <br></br>
   <Form.Group controlId="formBasicPassword">
-    <Form.Label>Key</Form.Label>
+    <Form.Label style={{fontSize:'1.6rem'}}>Key</Form.Label>
     <Form.Control name='key' required value={this.state.key} onChange={this.change.bind(this)} type="text" placeholder="Enter key" />
   </Form.Group>
-  
-  <Button variant="primary" type="submit" onClick={this.click.bind(this)}>
+  <br></br>
+  <div  className='container-fluid position-relative'>  
+  <Button variant="primary" className='our-button ' type="submit" onClick={this.click.bind(this)}>
     Submit
   </Button>
+  </div>
 </Form>
-<div className='text-center'>
+<br></br>
+<div className='text-center mt-5'>
         <h2>Your Decrypted Message Is:</h2>
         <h3 id='Answer'></h3>
 </div>
+        </div>
+        </div>
         </div>
     )
     }
