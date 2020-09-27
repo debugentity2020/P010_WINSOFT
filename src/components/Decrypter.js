@@ -78,7 +78,7 @@ export default class Decrypter extends Component {
 <br></br>
 <div className='text-center mt-5'>
         <h2>Your Decrypted Message Is:</h2>
-        <h3 id='Answer' className='text-light'></h3>
+        <h2 id='Answer' className='' style={{color:'aqua'}}></h2>
 </div>
         </div>
         </div>

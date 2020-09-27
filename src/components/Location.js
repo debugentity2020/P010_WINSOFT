@@ -47,6 +47,7 @@ export default function Location() {
             let fugitive=document.createElement('DIV')
             fugitive.innerHTML=fugitiveString
             fugitive.style.fontSize='2rem'
+            fugitive.style.marginBottom='15px'
             document.getElementById('subarray').appendChild(fugitive)
             for(let i=0;i<finalanswer.length;i++){
                 var node = document.createElement("LI");
