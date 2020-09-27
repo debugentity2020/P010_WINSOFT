@@ -121,7 +121,7 @@ export default function Location() {
     return (
         
         <div style={{backgroundColor:'black',height:'200vh',color:'greenyellow'}}>
-            
+            <div className="display-3 text-center">Location Tracer</div>
             {/* <input type="text" value={name} onChange={click}/>
             <button type='submit' onClick={onsubmit}>Submit</button> */}
             
