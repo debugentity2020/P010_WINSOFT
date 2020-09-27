@@ -6,7 +6,7 @@ import {BrowserRouter,Route} from 'react-router-dom'
 import Home from './components/Home';
 import Decrypter from './components/Decrypter';
 import Location from './components/Location';
-import Login from './components/Login';
+// import Login from './components/Login';
 import axios from 'axios'
 import { useHistory } from "react-router-dom";
 
