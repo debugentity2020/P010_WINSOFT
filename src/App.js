@@ -29,8 +29,8 @@ function App() {
   
   return (
     <div>
-    <input type="text" name='key' required value={name} onChange={click} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)"/>
-    <button type='submit' onClick={onsubmit}>Submit</button>
+    {/* <input type="text" name='key' required value={name} onChange={click} type="text" placeholder="Enter the input in ',' seperated form : ref(A,B,C)"/>
+    <button type='submit' onClick={onsubmit}>Submit</button> */}
     
     <Login name={(isLoggedIN)=>isLoggedIN?'ok':'notOK'} password={pass}/>
     </div>

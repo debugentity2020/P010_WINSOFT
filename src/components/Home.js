@@ -1,6 +1,6 @@
 import React from 'react'
 import './Home.css'
-
+import {BrowserRouter,Route,Link} from 'react-router-dom'
 export default function Home() {
     let heading = "WINSOFT TECHNOLOGIES"
     let subHeading = "Commited to Infotech"
@@ -17,8 +17,8 @@ export default function Home() {
                     fontSize:"3rem"}}>{subHeading}</h3>
                         <div className="row">
                             <div className="col-12">
-                            <button className="m-2 px-4 py-2 btn " style={{backgroundColor:"forestgreen" ,}}>Decrypter</button>
-                                <button className="m-2 px-4 py-2 btn " style={{backgroundColor:"forestgreen" ,}}>Location</button>
+                            <Link to='/Decrypter'>  <button className="m-2 px-4 py-2 btn " style={{backgroundColor:"forestgreen" ,}}>Decrypter</button></Link>
+                            <Link to='/Location'>   <button className="m-2 px-4 py-2 btn " style={{backgroundColor:"forestgreen" ,}}>Location</button></Link>
                             </div>
                         </div>
                     </div>
