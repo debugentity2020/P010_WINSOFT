@@ -1,6 +1,7 @@
 import React ,{ Component }  from 'react'
 import {Form,Button} from 'react-bootstrap'
 import './Decrypter.css';
+import axios from 'axios'
 export default class Decrypter extends Component {
 
     constructor(){
@@ -14,28 +15,21 @@ export default class Decrypter extends Component {
     }
     
     submit(key,input){
-        fetch("/decrypt",{
-            method:"post",
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                key,
-                input
-            })
-        }).then(res=>res.json())
-        .then(data=>{
-           if(data.error){
-            //   M.toast({html: data.error,classes:"#c62828 red darken-3"})
-           }
-           else{
-            //    M.toast({html:data.message,classes:"#43a047 green darken-1"})
-            //    history.push('/signin')
-            console.log(data);
-           }
-        }).catch(err=>{
-            console.log(err)
+        let answerString=''
+        axios.post('/decrypt' , this.state)
+        .then(response => {
+            console.log(response.data)
+            answerString=response.data.data
+            answerString = answerString.replaceAll( ',' , "" )
+    answerString = answerString.replaceAll( '_' , "" )
+    console.log(answerString);
+    document.getElementById('Answer').innerHTML=answerString;
+            
+            
         })
+        
+        
+
     }
     change(e){
         this.setState({
@@ -49,108 +43,6 @@ export default class Decrypter extends Component {
         var input = this.state.msg;
         this.submit(key,input)
         /* Generated from Java with JSweet 2.2.0-SNAPSHOT - http://www.jsweet.org */
-var Decryption = (function () {
-    function Decryption() {
-    }
-    Decryption.sortString = function (inputString) {
-        var tempArray = (inputString).split('');
-        /* sort */ (function (l) { l.sort(); })(tempArray);
-        return tempArray.join('');
-    };
-    Decryption.main = function (args) {
-        
-        var key1 = Decryption.sortString(key);
-        
-        var k = 0;
-        var decrypt = (function (dims) { var allocate = function (dims) { if (dims.length == 0) {
-            return null;
-        }
-        else {
-            var array = [];
-            for (var i = 0; i < dims[0]; i++) {
-                array.push(allocate(dims.slice(1)));
-            }
-            return array;
-        } }; return allocate(dims); })([(input.length / key.length | 0), key.length]);
-        for (var i = 0; i < key.length; i++) {
-            {
-                for (var j = 0; j < (input.length / key.length | 0); j++) {
-                    {
-                        if (k < input.length) {
-                            var c = input.charAt(k++);
-                            decrypt[j][i] = c;
-                        }
-                        else
-                            decrypt[j][i] = ' ';
-                    }
-                    ;
-                }
-            }
-            ;
-        }
-        for (var i = 0; i < (input.length / key.length | 0); i++) {
-            {
-                for (var j = 0; j < key.length; j++) {
-                    {
-                        // console.info(decrypt[i][j]);
-                    }
-                    ;
-                }
-                console.info();
-            }
-            ;
-        }
-        var key2 = (key).split('');
-        var key3 = (key1).split('');
-        console.info();
-        var count = 0;
-        var answer = (function (dims) { var allocate = function (dims) { if (dims.length == 0) {
-            return null;
-        }
-        else {
-            var array = [];
-            for (var i = 0; i < dims[0]; i++) {
-                array.push(allocate(dims.slice(1)));
-            }
-            return array;
-        } }; return allocate(dims); })([(input.length / key.length | 0), key.length]);
-        for (var i = 0; i < key.length; i++) {
-            {
-                var index = key.indexOf(key3[i]);
-                for (k = 0; k < (input.length / key.length | 0); k++) {
-                    {
-                        answer[k][index] = decrypt[k][i];
-                    }
-                    ;
-                }
-                var temp = (key).split('');
-                temp[index] = '`';
-                key = temp.join('');
-            }
-            ;
-        }
-        for (var i = 0; i < (input.length / key.length | 0); i++) {
-            {
-                for (var j = 0; j < key.length; j++) {
-                    {
-                        if ((function (c) { return c.charCodeAt == null ? c : c.charCodeAt(0); })(answer[i][j]) != '_'.charCodeAt(0))
-                            console.log(answer[i][j]);
-                            
-                    }
-                    ;
-                }
-            }
-            ;
-        }
-        var answerString=answer.toString();
-        answerString = answerString.replaceAll( ',' , "" )
-        answerString = answerString.replaceAll( '_' , "" )
-        document.getElementById('Answer').innerHTML=answerString;
-    };
-    return Decryption;
-}());
-Decryption["__class"] = "Decryption";
-Decryption.main(null);
 
     }
 
@@ -186,7 +78,7 @@ Decryption.main(null);
 <br></br>
 <div className='text-center mt-5'>
         <h2>Your Decrypted Message Is:</h2>
-        <h3 id='Answer'></h3>
+        <h3 id='Answer' className='text-light'></h3>
 </div>
         </div>
         </div>
