@@ -10,8 +10,33 @@ export default class Decrypter extends Component {
             key:"",
             answer:[]
         }
+        this.submit=this.submit.bind(this)
     }
     
+    submit(key,input){
+        fetch("/decrypt",{
+            method:"post",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify({
+                key,
+                input
+            })
+        }).then(res=>res.json())
+        .then(data=>{
+           if(data.error){
+            //   M.toast({html: data.error,classes:"#c62828 red darken-3"})
+           }
+           else{
+            //    M.toast({html:data.message,classes:"#43a047 green darken-1"})
+            //    history.push('/signin')
+            console.log(data);
+           }
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
     change(e){
         this.setState({
             [e.target.name]:e.target.value
@@ -22,6 +47,7 @@ export default class Decrypter extends Component {
         // console.log(this.state.msg)
         var key = this.state.key;
         var input = this.state.msg;
+        this.submit(key,input)
         /* Generated from Java with JSweet 2.2.0-SNAPSHOT - http://www.jsweet.org */
 var Decryption = (function () {
     function Decryption() {
@@ -127,6 +153,7 @@ Decryption["__class"] = "Decryption";
 Decryption.main(null);
 
     }
+
     render(){
         
     return (
